@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* Laptop */
+@media (max-width: 1399.98px) {
+  .header {
+    width: 30%;
+    margin-top: 0;
+  }
+  .Home-main {
+    width: 30%;
+  }
+  .open-modal{
+    width: 30%;
+  }
+}
+
+/* Min Laptop */
+@media (max-width: 1199.98px) {
+  .header {
+    width: 50%;
+    margin-top: 0;
+  }
+  .Home-main {
+    width: 50%;
+  }
+  .open-modal{
+    width: 50%;
+  }
+}
+
+/* Tab */
+@media (max-width: 991.98px) {
+  .header {
+    width: 60%;
+    margin-top: 0;
+  }
+  .Home-main {
+    width: 60%;
+  }
+  .open-modal{
+    width: 60%;
+  }
+}
+
+/* Round mobile */
+@media (max-width: 767.98px) {
+  .header {
+    width: 70%;
+    margin-top: 0;
+  }
+  .Home-main {
+    width: 70%;
+  }
+  .open-modal{
+    width: 70%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 567.98px) {
+  .video-container {
+    width: 100%;
+    height: 120vh;
+  }
+  .header {
+    width: 100%;
+    margin-top: 0;
+  }
+  .Home-main {
+    width: 100%;
+  }
+  .open-modal{
+    width: 100%;
+  }
+}

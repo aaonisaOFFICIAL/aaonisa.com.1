@@ -1,0 +1,17 @@
+.footer{
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: -100px;
+  gap: 10px;
+  left: 20px;
+  >img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+  >p{
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
