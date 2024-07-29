@@ -47,8 +47,7 @@ const NavigateFooter = () => {
         </a>
         </div>
         <div className="nav-popup-link">
-          <Link to="/support">Help & support</Link>
-          {/* <a href="/support" ></a> */}
+
         </div>
       </div>
 
