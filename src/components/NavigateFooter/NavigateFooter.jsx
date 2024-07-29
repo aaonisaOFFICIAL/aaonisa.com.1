@@ -15,19 +15,19 @@ const NavigateFooter = () => {
 
   const handleClickOutside = (event) => {
     if (popupRef.current && !popupRef.current.contains(event.target)) {
-      var element = document.getElementById("myDIV");
-      if (element.classList.contains("mystyle")) {
-        element.classList.remove("mystyle");
+      const getButton = document.querySelector('.nav-popup-button button');
+      if (!getButton.contains(event.target) && event.target !== getButton) {
+        var element = document.getElementById("myDIV");
+        if (element.classList.contains("mystyle")) {
+          element.classList.remove("mystyle");
+        }
       }
     }
   };
+  const handleGetAppClick = (event) => {
+    event.stopPropagation();
+  };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   return (
     <>
@@ -42,9 +42,9 @@ const NavigateFooter = () => {
           </h2>
         </div>
         <div className="nav-popup-button">
-          <a href="https://play.google.com/store/apps/details?id=com.aaonisaalive">
-            <button>Get the App</button>
-          </a>
+        <a href="https://play.google.com/store/apps/details?id=com.aaonisaalive"  target="_blank">
+          <button onClick={handleGetAppClick}>Get the App</button>
+        </a>
         </div>
         <div className="nav-popup-link">
           <Link to="/support">Help & support</Link>

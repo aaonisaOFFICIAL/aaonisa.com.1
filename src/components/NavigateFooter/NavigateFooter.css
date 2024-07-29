@@ -8,12 +8,14 @@
   /* display: flex; */
   /* align-items: center; */
 }
+
 .navigate-main {
   display: flex;
   align-items: center;
   justify-content: space-around;
   /* padding: 0px 15px; */
 }
+
 .navigate-icons {
   width: 30px;
   height: 30px;
@@ -26,14 +28,17 @@
   color: white;
   transition: 0.5s;
 }
+
 .nav-home {
   border: 3px solid white;
 }
+
 .nav-logo {
   background-color: white;
   width: 40px;
   height: 40px;
 }
+
 .nav-logo img {
   height: 30px !important;
 }
@@ -43,15 +48,18 @@
   background-color: white;
   color: black;
 }
+
 .nav-play {
   border: 3px solid white;
   font-size: 14px !important;
 }
+
 .nav-user {
   border: 3px solid white;
   background-color: white;
   color: black;
 }
+
 .navigate-popup {
   display: none;
   background-color: white;
@@ -60,22 +68,28 @@
   padding: 10px 0px;
   z-index: 999;
   position: relative;
-  animation: navigate-popup 1s ;
+  animation: navigate-popup 1s;
+  /* Remove pointer-events: none; */
 }
+
 .mystyle {
   display: block;
 }
+
 .nav-popup-logo img {
   border-radius: 50px;
   padding: 5px;
   border: 1px solid goldenrod;
 }
+
 .nav-popup-h2 {
   font-size: 14px;
 }
+
 .nav-popup-button {
   margin: 13px 0px;
 }
+
 .nav-popup-button button {
   border: 1px solid goldenrod;
   background-color: goldenrod;
@@ -84,14 +98,17 @@
   padding: 7px 15px;
   border-radius: 25px;
 }
+
 .nav-popup-button button:hover {
   background: none;
   color: goldenrod;
 }
+
 .nav-popup-link a {
   color: black;
   font-weight: bold;
 }
+
 .nav-popup-link a:hover {
   color: rgb(235, 173, 4);
 }
@@ -103,4 +120,8 @@
   to {
     bottom: 0px;
   }
+}
+.navigate-popup {
+  /* Make sure pointer-events is not set to none */
+  pointer-events: auto;
 }
