@@ -23,15 +23,15 @@ const Home = () => {
         videosRef,
         where('type', '==', 'video'),
         orderBy('date'),
-        startAt(startAtDoc), // Start at the randomly selected document
-        limit(10) // Load 10 more videos
+        startAt(startAtDoc),
+        limit(10)
       );
     } else {
       q = query(
         videosRef,
         where('type', '==', 'video'),
         orderBy('date'),
-        limit(10) // Load 10 videos initially
+        limit(10)
       );
     }
 
