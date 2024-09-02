@@ -78,11 +78,11 @@ const SingleVideo = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const index = videoRefs.current.indexOf(entry.target);
           if (entry.isIntersecting) {
-            const index = videoRefs.current.indexOf(entry.target);
-            if (videos[index] && videos[index].id !== id) {
-              navigate(`/videos/${videos[index].id}`);
-            }
+            entry.target.play();  // Play the video when it is fully visible
+          } else {
+            entry.target.pause(); // Pause the video when it is not visible
           }
         });
       },
@@ -102,7 +102,7 @@ const SingleVideo = () => {
         if (video) observer.unobserve(video);
       });
     };
-  }, [videos, id]);
+  }, [videos]);
 
   const handleScroll = () => {
     const videoContainer = document.getElementById('video-container');
