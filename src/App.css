@@ -30,7 +30,7 @@ table, th, td {
 
 .video-container {
   position: relative;
-  height: 84vh;
+  height: 100vh;
   width: 100%;
   
   /* border-radius: 20px; */
@@ -40,6 +40,12 @@ table, th, td {
   scrollbar-width: none;
   object-fit: cover;
   
+}
+.video-container .video-item {
+  scroll-snap-align: start;
+  flex: 0 0 100%; /* Take full height */
+  height: 100vh;
+  transition: transform 0.3s ease-in-out;
 }
 
 /* for chrome and opera */
