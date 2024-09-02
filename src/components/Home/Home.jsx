@@ -1,5 +1,5 @@
 import React, { lazy, useEffect, useState } from 'react';
-import { query, collection, getDocs, where, orderBy, limit, startAfter, startAt } from 'firebase/firestore';
+import { query, collection, getDocs, where, orderBy, limit, startAfter } from 'firebase/firestore';
 import { db } from '../../config';
 import Header from '../Header/Header';
 
@@ -23,7 +23,7 @@ const Home = () => {
         videosRef,
         where('type', '==', 'video'),
         orderBy('date'),
-        startAt(startAtDoc),
+        startAfter(startAtDoc), // Use startAfter instead of startAt
         limit(10)
       );
     } else {
