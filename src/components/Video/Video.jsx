@@ -30,31 +30,26 @@ export default function Video({
   };
 
   useEffect(() => {
-    // const scroll = document.getElementById("video-container");
-
-    // if (scroll) {
-    //   scroll.addEventListener("scroll", () => {
-    //     vidRef.current.pause();
-    //   });
-    // }
-
     const scroll = document.getElementById("video-container");
 
     const playVideo = () => {
-      if (isVideoVisible()) {
-        vidRef.current.play();
-      } else {
-        vidRef.current.pause();
-      }
+        if (vidRef.current && isVideoVisible()) {
+            vidRef.current.play();
+        } else if (vidRef.current) {
+            vidRef.current.pause();
+        }
     };
 
     const isVideoVisible = () => {
-      const rect = vidRef.current.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.bottom <=
-          (window.innerHeight || document.documentElement.clientHeight)
-      );
+        if (vidRef.current) {
+            const rect = vidRef.current.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.bottom <=
+                (window.innerHeight || document.documentElement.clientHeight)
+            );
+        }
+        return false;
     };
 
     // Initial play when component mounts
@@ -62,16 +57,17 @@ export default function Video({
 
     // Set up event listener for scrolling
     if (scroll) {
-      scroll.addEventListener("scroll", playVideo);
+        scroll.addEventListener("scroll", playVideo);
     }
 
     // Cleanup event listener on component unmount
     return () => {
-      if (scroll) {
-        scroll.removeEventListener("scroll", playVideo);
-      }
+        if (scroll) {
+            scroll.removeEventListener("scroll", playVideo);
+        }
     };
-  }, []);
+}, [isVideoPlaying]);
+
 
   return (
     <Suspense fallback={<div style={{ color: "#000" }}>Loading...</div>}>
