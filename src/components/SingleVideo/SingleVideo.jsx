@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { collection, getDocs, query, where, orderBy, startAfter, limit } from 'firebase/firestore';
 import { db } from '../../config';
@@ -12,9 +12,7 @@ const SingleVideo = () => {
   const [lastVisible, setLastVisible] = useState(null);
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
-  const navigate = useNavigate();
-  const lastScrollTop = useRef(0);
-  const scrollTimeout = useRef(null);
+  const navigate = useNavigate();  // Replacing useHistory with useNavigate
 
   const getData = async (startAtDoc = null) => {
     if (loading) return;
@@ -68,61 +66,38 @@ const SingleVideo = () => {
     getData();
   }, [id]);
 
-  const handleScroll = useCallback(() => {
+  const handleScroll = () => {
     const videoContainer = document.getElementById('video-container');
     if (videoContainer) {
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
+      const scrollPosition = videoContainer.scrollTop + videoContainer.offsetHeight;
+      const height = videoContainer.scrollHeight;
+
+      if (scrollPosition >= height - 200) {
+        getData(lastVisible);
       }
 
-      scrollTimeout.current = setTimeout(() => {
-        const scrollTop = videoContainer.scrollTop;
-        const isScrollingDown = scrollTop > lastScrollTop.current;
-        const videoHeight = window.innerHeight;
-        const scrollThreshold = videoHeight / 2; // Adjust this threshold as needed
-
-        lastScrollTop.current = scrollTop;
-
-        // Change video only if scrolling down and significant scroll distance
-        if (isScrollingDown && Math.abs(scrollTop - lastScrollTop.current) > scrollThreshold) {
-          const currentVideoIndex = Math.round(scrollTop / videoHeight);
-          if (videos[currentVideoIndex]) {
-            navigate(`/videos/${videos[currentVideoIndex].id}`);
-          }
-        }
-
-        // Load more videos when nearing the bottom
-        if (isScrollingDown && videoContainer.scrollHeight - scrollTop === videoContainer.clientHeight) {
-          getData(lastVisible);
-        }
-      }, 200); // Debounce timeout of 200ms, adjust as needed
+      const currentVideoIndex = Math.floor(scrollPosition / window.innerHeight);
+      if (videos[currentVideoIndex]) {
+        navigate(`/videos/${videos[currentVideoIndex].id}`);
+      }
     }
-  }, [videos, lastVisible, navigate]);
-
-  useEffect(() => {
-    const videoContainer = document.getElementById('video-container');
-    if (videoContainer) {
-      videoContainer.addEventListener('scroll', handleScroll);
-      return () => videoContainer.removeEventListener('scroll', handleScroll);
-    }
-  }, [handleScroll]);
+  };
 
   return (
     <div className="App">
       <Header />
       <center className="Home-main">
-        <div className="video-container" id="video-container">
+        <div className="video-container" id="video-container" onScroll={handleScroll}>
           {videos.map((data) => (
-            <div className="video-item" key={data.id}>
-              <Video
-                url={data.videoUrl}
-                username={data.username}
-                profile={data.profile}
-                likes={data.likes}
-                comment={data.commentCount}
-                share={data.shareCount}
-              />
-            </div>
+            <Video
+              key={data.id}
+              url={data.videoUrl}
+              username={data.username}
+              profile={data.profile}
+              likes={data.likes}
+              comment={data.commentCount}
+              share={data.shareCount}
+            />
           ))}
           {loading && <div>Loading...</div>}
         </div>
